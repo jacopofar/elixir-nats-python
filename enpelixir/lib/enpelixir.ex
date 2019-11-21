@@ -29,7 +29,8 @@ defmodule Enpelixir do
     receive do
         {:msg, %{body: body, topic: "test-subject", reply_to: nil}} ->
         IO.puts("Received: #{body}")
-        if :rand.uniform(1) > 0.5 do
+        if :rand.uniform() > 0.5 do
+            IO.puts("Will send a message now...")
             :ok = Gnat.pub(gnat, "test-subject-two", "Hello snake-y friend, this is Elixir writing!")
         end
     end
